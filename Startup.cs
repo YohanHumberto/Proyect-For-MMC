@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Project1_Angular.Contexto;
+using Project1_Angular.Servicios;
 
 namespace Project1_Angular
 {
@@ -22,6 +23,12 @@ namespace Project1_Angular
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Agregamos los servicios
+            services.AddTransient<IContextDB, ContextDB>();
+            services.AddTransient<IClienteService, ClienteService>();
+            services.AddTransient<IProductoService, ProductoService>();
+            services.AddTransient<IOrdenesService, OrdenesService>();
+
             // Agregamos el conexto
             services.AddDbContext<ContextDB>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             //services.AddControllers();

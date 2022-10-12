@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project1_Angular.Contexto
 {
-    public class ContextDB : DbContext
+    public class ContextDB : DbContext, IContextDB
     {
         public ContextDB(DbContextOptions<ContextDB> options) : base(options)
         {
