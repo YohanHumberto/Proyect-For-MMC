@@ -1,0 +1,24 @@
+<h1 id="tableLabel">Lista de Ordenes</h1>
+
+<p *ngIf="!ordenes"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="ordenes">
+  <thead>
+    <tr>
+      <th>OrdenesId</th>
+      <th>Cantidad</th>
+      <th>ProductoId</th>
+      <th>ClienteId</th>
+      <th>Estado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let orden of ordenes">
+      <td>{{ orden.ordenesId }}</td>
+      <td>{{ orden.cantidad }}</td>
+      <td>{{ orden.productoId }}</td>
+      <td>{{ orden.clienteId }}</td>
+      <td>{{ orden.estado }}</td>
+    </tr>
+  </tbody>
+</table>
