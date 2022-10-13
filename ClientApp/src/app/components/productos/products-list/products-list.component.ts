@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Producto } from '../../../Models/Producto';
+import { ProductService } from '../../../Service/product.service';
 
 @Component({
   selector: 'app-products-list',
@@ -8,22 +9,24 @@ import { HttpClient } from '@angular/common/http';
 export class ProductsListComponent implements OnInit {
 
   public productos: Producto[];
-
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<Producto[]>(baseUrl + 'productos').subscribe(result => {
-      this.productos = result;
-    }, error => console.error(error));
+  public _productService: ProductService;
+ 
+  constructor(private productService: ProductService) {
+    this._productService = productService;
   }
 
   ngOnInit() {
+    this.LoadData();
+  }
+
+  async LoadData() {
+    this.productos = await this._productService.GetAllProducts();
+  } 
+
+  async OnDeleteProduct(ProductosId: number) {
+    await this._productService.DeleteProduct(ProductosId);
+    this.LoadData();
   }
 
 }
 
-interface Producto {
-  ProductosId: number;
-  Nombre: string;
-  Tipo: string;
-  Cantidad: number;
-  Estado: boolean;
-}

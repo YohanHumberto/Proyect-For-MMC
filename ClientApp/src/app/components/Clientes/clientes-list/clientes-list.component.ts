@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Cliente } from '../../../Models/Cliente';
+import { ClientService } from '../../../Service/client.service';
 
 @Component({
   selector: 'app-clientes-list',
@@ -8,21 +9,24 @@ import { HttpClient } from '@angular/common/http';
 export class ClientesListComponent implements OnInit {
 
   public clientes: Cliente[];
+  public _ClienteService: ClientService;
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<Cliente[]>(baseUrl + 'clientes').subscribe(result => {
-      this.clientes = result;
-    }, error => console.error(error));
+  constructor(private ClienteService: ClientService) {
+    this._ClienteService = ClienteService;
   }
+
   ngOnInit() {
+    this.LoadData();
+  }
+
+  async LoadData() {
+    this.clientes = await this._ClienteService.GetAllClientes();
+  }
+
+  async OnDeleteCliente(ClientesId: number) {
+    await this._ClienteService.DeleteCliente(ClientesId);
+    this.LoadData();
   }
 
 }
 
-interface Cliente {
-  ClientesId: number;
-  Nombre: string;
-  Apellido: string;
-  Email: string;
-  Estado: boolean;
-}

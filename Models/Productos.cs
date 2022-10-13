@@ -15,6 +15,8 @@ namespace Project1_Angular.Models
 
         public int Cantidad { get; set; }
 
+        public int Precio { get; set; }
+
         public bool Estado { get; set; }
 
     }

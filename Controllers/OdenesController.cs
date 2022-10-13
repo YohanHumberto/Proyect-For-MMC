@@ -35,7 +35,7 @@ namespace Project1_Angular.Controllers
 
 
         [HttpPost]
-        public IActionResult AddOrdenes([FromForm] Ordenes Orden)
+        public IActionResult AddOrdenes([FromBody] Ordenes Orden)
         {
 
             ResStruct res = new ResStruct()
@@ -52,7 +52,7 @@ namespace Project1_Angular.Controllers
 
 
         [HttpPut]
-        public IActionResult UpdateOrdenes(Ordenes Orden)
+        public IActionResult UpdateOrdenes([FromBody] Ordenes Orden)
         {
 
             ResStruct res = new ResStruct()

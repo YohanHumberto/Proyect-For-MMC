@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Orden } from '../../../Models/Orden';
+import { OrdenService } from '../../../Service/orden.service';
 
 @Component({
   selector: 'app-ordenes-list',
@@ -8,24 +9,25 @@ import { HttpClient } from '@angular/common/http';
 export class OrdenesListComponent implements OnInit {
 
   public ordenes: Orden[];
+  public _ordeneservice: OrdenService;
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<Orden[]>(baseUrl + 'ordenes').subscribe(result => {
-      this.ordenes = result;
-    }, error => console.error(error));
+  constructor(private ordeneservice: OrdenService) {
+    this._ordeneservice = ordeneservice;
   }
 
   ngOnInit() {
+    this.LoadData();
   }
 
-}
+  async LoadData() {
+    this.ordenes = await this._ordeneservice.GetAllOrdenes();
+  }
+
+  async OnDeleteordene(ordeneId: number) {
+    await this._ordeneservice.DeleteOrden(ordeneId);
+    this.LoadData();
+  }
 
 
-interface Orden {
-  OrdenesId: number;
-  Cantidad: number;
-  ProductoId: number;
-  ClienteId: number;
-  Estado: boolean;
 }
 

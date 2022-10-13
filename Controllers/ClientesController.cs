@@ -36,7 +36,7 @@ namespace Project1_Angular.Controllers
 
      
         [HttpPost]
-        public IActionResult AddClientes([FromForm] Clientes Cliente)
+        public IActionResult AddClientes([FromBody] Clientes Cliente)
         {
 
             ResStruct res = new ResStruct()
@@ -53,7 +53,7 @@ namespace Project1_Angular.Controllers
 
       
         [HttpPut]
-        public IActionResult UpdateClientes(Clientes Cliente)
+        public IActionResult UpdateClientes([FromBody] Clientes Cliente)
         {
 
             ResStruct res = new ResStruct()

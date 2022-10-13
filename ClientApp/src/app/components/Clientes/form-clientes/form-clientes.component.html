@@ -1,1 +1,20 @@
-<p>form-clientes works!</p>
+<main class="container pt-5 row m-0">
+  <form class="m-auto col-12 col-md-8 col-lg-6 border shadow p-4">
+    <h2 class="mb-3">Agregar Cliente</h2>
+    <div class="alert alert-danger" *ngIf="alertDangerIsActive">
+      Debe completar todos los campos
+    </div>
+    <div class="alert alert-primary" *ngIf="alertSuccessIsActive">
+      Producto guardado correctamente
+    </div>
+    <input [(ngModel)]="cliente.nombre" name="Nombre" class="form-control my-2" type="text" placeholder="Nombre">
+    <input [(ngModel)]="cliente.apellido" name="apellido" class="form-control my-2" type="text" placeholder="Apellido">
+    <input [(ngModel)]="cliente.email" name="email" class="form-control my-2" type="text" placeholder="Email">
+    <select [(ngModel)]="cliente.estado" name="Estado" class="form-control my-2">
+      <option value="true">Activo</option>
+      <option value="false">Inactivo</option>
+    </select>
+    <a class="btn btn-danger px-2 me-2" [routerLink]="['/clientes-list']">Cancelar</a>
+    <button class="btn btn-primary px-2 me-3 " (click)="procesarFormulario($event)">Guardar</button>
+  </form>
+</main>

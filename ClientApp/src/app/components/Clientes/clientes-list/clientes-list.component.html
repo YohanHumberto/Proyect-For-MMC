@@ -2,23 +2,32 @@
 
 <p *ngIf="!clientes"><em>Loading...</em></p>
 
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="clientes">
-  <thead>
-    <tr>
-      <th>ClientesId</th>
-      <th>Nombre</th>
-      <th>Apellido</th>
-      <th>Email</th>
-      <th>Estado</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let cliente of clientes">
-      <td>{{ cliente.clientesId }}</td>
-      <td>{{ cliente.nombre }}</td>
-      <td>{{ cliente.apellido }}</td>
-      <td>{{ cliente.email }}</td>
-      <td>{{ cliente.estado }}</td>
-    </tr>
-  </tbody>
-</table>
+
+<div *ngIf="clientes">
+  <a class="btn btn-success m-2 ms-0" [routerLink]="['/clientes/add']">Agregar</a>
+  <table class='table table-striped text-center' aria-labelledby="tableLabel" *ngIf="clientes">
+    <thead>
+      <tr>
+        <th>ClientesId</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Email</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of clientes">
+        <td>{{ cliente.clientesId }}</td>
+        <td>{{ cliente.nombre }}</td>
+        <td>{{ cliente.apellido }}</td>
+        <td>{{ cliente.email }}</td>
+        <td>{{ cliente.estado }}</td>
+        <td>
+          <a class="btn btn-warning me-2" [routerLink]="['/clientes/edit/'+cliente.clientesId]">Editar</a>
+          <button class="btn btn-danger" (click)="OnDeleteCliente(cliente.clientesId)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

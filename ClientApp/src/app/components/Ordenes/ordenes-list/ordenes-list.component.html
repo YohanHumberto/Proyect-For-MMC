@@ -2,23 +2,32 @@
 
 <p *ngIf="!ordenes"><em>Loading...</em></p>
 
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="ordenes">
-  <thead>
-    <tr>
-      <th>OrdenesId</th>
-      <th>Cantidad</th>
-      <th>ProductoId</th>
-      <th>ClienteId</th>
-      <th>Estado</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let orden of ordenes">
-      <td>{{ orden.ordenesId }}</td>
-      <td>{{ orden.cantidad }}</td>
-      <td>{{ orden.productoId }}</td>
-      <td>{{ orden.clienteId }}</td>
-      <td>{{ orden.estado }}</td>
-    </tr>
-  </tbody>
-</table>
+
+<div *ngIf="ordenes">
+  <a class="btn btn-success m-2 ms-0" [routerLink]="['/ordenes/add']">Agregar</a>
+  <table class='table table-striped text-center' aria-labelledby="tableLabel" *ngIf="ordenes">
+    <thead>
+      <tr>
+        <th>OrdenesId</th>
+        <th>Cantidad</th>
+        <th>ProductoId</th>
+        <th>ClienteId</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let orden of ordenes">
+        <td>{{ orden.ordenesId }}</td>
+        <td>{{ orden.cantidad }}</td>
+        <td>{{ orden.productoId }}</td>
+        <td>{{ orden.clienteId }}</td>
+        <td>{{ orden.estado }}</td>
+        <td>
+          <a class="btn btn-warning me-2" [routerLink]="['/ordenes/edit/'+orden.ordenesId]">Editar</a>
+          <button class="btn btn-danger" (click)="OnDeleteordene(orden.ordenesId)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -34,7 +34,7 @@ namespace Project1_Angular.Controllers
             }
 
             var productos = _context.Productos
-                .FirstOrDefaultAsync(m => m.ProductosId == id);
+                .FirstOrDefault(m => m.ProductosId == id);
             if (productos == null)
             {
                 return NotFound();
@@ -47,7 +47,7 @@ namespace Project1_Angular.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public IActionResult Create([Bind("ProductosId,Nombre,Tipo,Cantidad,Estado")] Productos productos)
+        public IActionResult Create([FromBody] Productos productos)
         {
             try
             {
@@ -67,11 +67,11 @@ namespace Project1_Angular.Controllers
             }
         }
 
-        // POST: Productos/Edit/5
+        // POST: Productos/Edit
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public async Task<IActionResult> Edit([Bind("ProductosId,Nombre,Tipo,Cantidad,Estado")] Productos productos)
+        public async Task<IActionResult> Edit([FromBody] Productos productos)
         {
             try
             {
@@ -91,8 +91,8 @@ namespace Project1_Angular.Controllers
             }
         }
 
-        // POST: Productos/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // Delete: Productos/Delete/5
+        [HttpDelete, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var productos = await _context.Productos.FindAsync(id);
