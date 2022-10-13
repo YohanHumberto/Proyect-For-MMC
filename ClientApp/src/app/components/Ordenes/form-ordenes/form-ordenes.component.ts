@@ -44,8 +44,12 @@ export class FormOrdenesComponent implements OnInit {
     }
   }
 
-  procesarFormulario(e: Event) {
+  async procesarFormulario(e: Event) {
     e.preventDefault();
+
+    this.orden.producto = await this._productService.GetProdutById(this.orden.productoId);
+    this.orden.cliente = await this._clientService.GetClientById(this.orden.clienteId);
+
     const { cantidad } = this.orden;
     if ( cantidad ) {
       if (this.editIsActive) {
