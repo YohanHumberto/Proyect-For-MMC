@@ -10,6 +10,7 @@ export class ProductsListComponent implements OnInit {
 
   public productos: Producto[];
   public _productService: ProductService;
+  public searchText: string;
  
   constructor(private productService: ProductService) {
     this._productService = productService;
@@ -28,5 +29,10 @@ export class ProductsListComponent implements OnInit {
     this.LoadData();
   }
 
+  onSearch() {
+    const resSearch = this.productos.filter(item => JSON.stringify(item).toLowerCase().trim().match(this.searchText.toLowerCase().trim()));
+    this.productos = resSearch;
+    if (this.searchText == "") this.LoadData();
+  }
 }
 

@@ -10,6 +10,7 @@ export class OrdenesListComponent implements OnInit {
 
   public ordenes: Orden[];
   public _ordeneservice: OrdenService;
+  public searchText: string;
 
   constructor(private ordeneservice: OrdenService) {
     this._ordeneservice = ordeneservice;
@@ -28,6 +29,11 @@ export class OrdenesListComponent implements OnInit {
     this.LoadData();
   }
 
+  onSearch() {
+    const resSearch = this.ordenes.filter(item => JSON.stringify(item).toLowerCase().trim().match(this.searchText.toLowerCase().trim()));
+    this.ordenes = resSearch;
+    if (this.searchText == "") this.LoadData();
+  }
 
 }
 

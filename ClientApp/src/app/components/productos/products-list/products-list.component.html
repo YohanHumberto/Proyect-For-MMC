@@ -5,14 +5,18 @@
 
 <div *ngIf="productos">
 
-  <a class="btn btn-success m-2 ms-0" [routerLink]="['/product/add']">Agregar</a>
-  <table id="myTable" class='table  table-striped text-center' style="width: 100%;"  aria-labelledby="tableLabel">
+  <div class="row m-0 justify-content-between">
+    <a class="btn btn-success m-2 ms-0" [routerLink]="['/product/add']" style="max-width: 100px">Agregar</a>
+    <input type="text" placeholder="Search" class="form-control" style="width: 200px" [(ngModel)]="searchText" (ngModelChange)="onSearch()" />
+  </div>
+  <table id="myTable" class='table  table-striped text-center' style="width: 100%;" aria-labelledby="tableLabel">
     <thead>
       <tr>
         <th>ProductosId</th>
         <th>Nombre</th>
         <th>Tipo</th>
         <th>Cantidad</th>
+        <th>Precio</th>
         <th>Estado</th>
         <th>Acciones</th>
       </tr>
@@ -23,6 +27,7 @@
         <td>{{ producto.nombre }}</td>
         <td>{{ producto.tipo }}</td>
         <td>{{ producto.cantidad }}</td>
+        <td>{{ producto.precio }}</td>
         <td>{{ producto.estado }}</td>
         <td>
           <a class="btn btn-warning me-2" [routerLink]="['/product/edit/'+producto.productosId]">Editar</a>

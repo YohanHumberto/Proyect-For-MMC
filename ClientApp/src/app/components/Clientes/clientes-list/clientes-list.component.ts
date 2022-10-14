@@ -10,6 +10,7 @@ export class ClientesListComponent implements OnInit {
 
   public clientes: Cliente[];
   public _ClienteService: ClientService;
+  public searchText: string;
 
   constructor(private ClienteService: ClientService) {
     this._ClienteService = ClienteService;
@@ -26,6 +27,12 @@ export class ClientesListComponent implements OnInit {
   async OnDeleteCliente(ClientesId: number) {
     await this._ClienteService.DeleteCliente(ClientesId);
     this.LoadData();
+  }
+
+  onSearch() {
+    const resSearch = this.clientes.filter(item => JSON.stringify(item).toLowerCase().trim().match(this.searchText.toLowerCase().trim()));
+    this.clientes = resSearch;
+    if (this.searchText == "") this.LoadData();
   }
 
 }
