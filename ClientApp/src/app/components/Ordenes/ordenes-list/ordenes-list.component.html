@@ -5,7 +5,7 @@
 
 <div *ngIf="ordenes">
   <a class="btn btn-success m-2 ms-0" [routerLink]="['/ordenes/add']">Agregar</a>
-  <table class='table table-striped text-center' aria-labelledby="tableLabel" *ngIf="ordenes">
+  <table id="myTable" class='table table-striped text-center' aria-labelledby="tableLabel" *ngIf="ordenes">
     <thead>
       <tr>
         <th>OrdenesId</th>

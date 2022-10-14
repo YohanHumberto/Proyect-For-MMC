@@ -33,7 +33,7 @@ namespace Project1_Angular.Controllers
             return Ok(_Ordeneservice.GetOrdenesById(IdOrden));
         }
 
-
+       
         [HttpPost]
         public IActionResult AddOrdenes([FromBody] Ordenes Orden)
         {

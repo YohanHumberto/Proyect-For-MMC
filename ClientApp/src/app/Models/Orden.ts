@@ -4,9 +4,9 @@ import { Producto } from "./Producto";
 export class Orden {
   ordenesId: number = NaN;
   cantidad: number = NaN;
-  producto: Producto = new Producto();
+  producto: Producto = null;
   productoId: number = NaN;
-  cliente: Cliente = new Cliente();
+  cliente: Cliente = null;
   clienteId: number = NaN;
   estado: boolean = false;
 

@@ -47,8 +47,8 @@ export class FormOrdenesComponent implements OnInit {
   async procesarFormulario(e: Event) {
     e.preventDefault();
 
-    this.orden.producto = await this._productService.GetProdutById(this.orden.productoId);
-    this.orden.cliente = await this._clientService.GetClientById(this.orden.clienteId);
+    this.orden.productoId = parseInt(this.orden.productoId.toString());
+    this.orden.clienteId = parseInt(this.orden.clienteId.toString());
 
     const { cantidad } = this.orden;
     if ( cantidad ) {
@@ -73,7 +73,7 @@ export class FormOrdenesComponent implements OnInit {
       this.alertSuccessIsActive = true;
       setTimeout(() => {
         this.alertSuccessIsActive = false;
-        this.router.navigateByUrl('/Orden-list');
+        this.router.navigateByUrl('/ordenes-list');
       }, 2000);
     } else {
       alert("Ha ourrido un error");
@@ -86,7 +86,7 @@ export class FormOrdenesComponent implements OnInit {
       this.alertSuccessIsActive = true;
       setTimeout(() => {
         this.alertSuccessIsActive = false;
-        this.router.navigateByUrl('/Orden-list');
+        this.router.navigateByUrl('/ordenes-list');
       }, 2000);
     } else {
       alert("Ha ourrido un error");
@@ -94,7 +94,7 @@ export class FormOrdenesComponent implements OnInit {
   }
 
   IsEditMode() {
-    return this.route.snapshot.paramMap.get('idOrden');
+    return this.route.snapshot.paramMap.get('id');
   }
 
   async loadDataForDropDowList() {

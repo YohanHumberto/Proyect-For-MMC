@@ -1,34 +1,35 @@
-<h1 id="tableLabel">Lista de productos</h1>
 
+
+<h1 id="tableLabel">Lista de productos</h1>
 <p *ngIf="!productos"><em>Loading...</em></p>
 
 <div *ngIf="productos">
 
-<a class="btn btn-success m-2 ms-0" [routerLink]="['/product/add']">Agregar</a>
-<table class='table table-striped text-center' aria-labelledby="tableLabel" >
-  <thead>
-    <tr>
-      <th>ProductosId</th>
-      <th>Nombre</th>
-      <th>Tipo</th>
-      <th>Cantidad</th>
-      <th>Estado</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let producto of productos">
-      <td>{{ producto.productosId }}</td>
-      <td>{{ producto.nombre }}</td>
-      <td>{{ producto.tipo }}</td>
-      <td>{{ producto.cantidad }}</td>
-      <td>{{ producto.estado }}</td>
-      <td>
-        <a class="btn btn-warning me-2" [routerLink]="['/product/edit/'+producto.productosId]" >Editar</a>
-        <button class="btn btn-danger" (click)="OnDeleteProduct(producto.productosId)">Eliminar</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <a class="btn btn-success m-2 ms-0" [routerLink]="['/product/add']">Agregar</a>
+  <table id="myTable" class='table  table-striped text-center' style="width: 100%;"  aria-labelledby="tableLabel">
+    <thead>
+      <tr>
+        <th>ProductosId</th>
+        <th>Nombre</th>
+        <th>Tipo</th>
+        <th>Cantidad</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productos">
+        <td>{{ producto.productosId }}</td>
+        <td>{{ producto.nombre }}</td>
+        <td>{{ producto.tipo }}</td>
+        <td>{{ producto.cantidad }}</td>
+        <td>{{ producto.estado }}</td>
+        <td>
+          <a class="btn btn-warning me-2" [routerLink]="['/product/edit/'+producto.productosId]">Editar</a>
+          <button class="btn btn-danger" (click)="OnDeleteProduct(producto.productosId)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
 </div>
