@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, SimpleChanges } from '@angular/core';
 import { Orden } from '../../../Models/Orden';
 import { Producto } from '../../../Models/Producto';
 import { Cliente } from '../../../Models/Cliente';
@@ -22,6 +22,9 @@ export class FormOrdenesComponent implements OnInit {
   _ordenService: OrdenService;
   _clientService: ClientService;
   _productService: ProductService;
+  @Output() ReloadData = new EventEmitter();
+  @Input() modalOpen: boolean;
+  @Output() ChangeStateModalOpen: EventEmitter<boolean>  = new EventEmitter();
 
   constructor(
     private ordenService: OrdenService,
@@ -42,6 +45,9 @@ export class FormOrdenesComponent implements OnInit {
       let ele = await this._ordenService.GetOrdenById(parseInt(this.IsEditMode()));
       this.orden = ele ? ele : new Orden();
     }
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.modalOpen.currentValue) this.ngOnInit();
   }
 
   async procesarFormulario(e: Event) {
@@ -74,7 +80,9 @@ export class FormOrdenesComponent implements OnInit {
       setTimeout(() => {
         this.alertSuccessIsActive = false;
         this.router.navigateByUrl('/ordenes-list');
-      }, 2000);
+        this.closeModal();
+        this.ReloadData.emit();
+      }, 1000);
     } else {
       alert("Ha ourrido un error");
     }
@@ -87,6 +95,8 @@ export class FormOrdenesComponent implements OnInit {
       setTimeout(() => {
         this.alertSuccessIsActive = false;
         this.router.navigateByUrl('/ordenes-list');
+        this.closeModal();
+        this.ReloadData.emit();
       }, 2000);
     } else {
       alert("Ha ourrido un error");
@@ -94,7 +104,7 @@ export class FormOrdenesComponent implements OnInit {
   }
 
   IsEditMode() {
-    return this.route.snapshot.paramMap.get('id');
+    return localStorage.getItem("IdOrdenEdit");
   }
 
   async loadDataForDropDowList() {
@@ -102,4 +112,8 @@ export class FormOrdenesComponent implements OnInit {
     this.Productos = await this._productService.GetAllProducts();
   }
 
+  closeModal() {
+    this.ChangeStateModalOpen.emit(false);
+    localStorage.removeItem("IdOrdenEdit");
+  }
 }

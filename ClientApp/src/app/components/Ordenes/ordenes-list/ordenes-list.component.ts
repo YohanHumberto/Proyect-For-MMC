@@ -11,6 +11,7 @@ export class OrdenesListComponent implements OnInit {
   public ordenes: Orden[];
   public _ordeneservice: OrdenService;
   public searchText: string;
+  public modalOpen: boolean = false;
 
   constructor(private ordeneservice: OrdenService) {
     this._ordeneservice = ordeneservice;
@@ -33,6 +34,19 @@ export class OrdenesListComponent implements OnInit {
     const resSearch = this.ordenes.filter(item => JSON.stringify(item).toLowerCase().trim().match(this.searchText.toLowerCase().trim()));
     this.ordenes = resSearch;
     if (this.searchText == "") this.LoadData();
+  }
+
+  ReloadData() {
+    this.LoadData();
+  }
+
+  OnEditMode(id: number) {
+    this.modalOpen = true;
+    localStorage.setItem("IdOrdenEdit", `${id}`);
+  }
+
+  ChangeStateModalOpen(val: boolean) {
+    this.modalOpen = val;
   }
 
 }
